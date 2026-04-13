@@ -1,0 +1,55 @@
+{% extends 'supervision/base.html' %} {% load static %} {% block title %}Daftar
+Madrasah Binaan{% endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card bg-primary text-white">
+        <div class="card-body">
+          <h2 class="mb-2">
+            <i class="fas fa-school me-2"></i> Daftar Madrasah Binaan
+          </h2>
+          <p class="mb-0">Madrasah yang menjadi binaan Anda</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for data in data_madrasah %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ data.madrasah.nama }}</h5>
+          <p class="text-muted small">
+            {{ data.madrasah.get_jenis_display }} | {{ data.madrasah.status }}
+          </p>
+          <p class="small text-muted">
+            <i class="fas fa-map-marker-alt me-1"></i> {{
+            data.madrasah.kecamatan }}
+          </p>
+          <p class="small text-muted">
+            <i class="fas fa-chalkboard-teacher me-1"></i> Guru: {{
+            data.jumlah_guru }}
+          </p>
+          <p class="small text-muted">
+            <i class="fas fa-clipboard-list me-1"></i> Supervisi: {{
+            data.jumlah_supervisi }}
+          </p>
+          <p class="small">
+            <strong>Rata-rata Nilai:</strong> {{ data.rata_nilai }}
+          </p>
+        </div>
+        <div class="card-footer bg-white">
+          <a href="/guru-binaan/{{ data.madrasah.id }}/"class="btn btn-outline-primary btn-sm w-100">Lihat Guru</a
+          >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info text-center">Belum ada madrasah binaan</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

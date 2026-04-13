@@ -1,0 +1,27 @@
+{% extends 'supervision/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard 8 SNP Madrasah{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4"><div class="col-12"><div class="card bg-info text-white"><div class="card-body"><h2><i class="fas fa-chart-line me-2"></i> Dashboard 8 SNP Madrasah</h2></div></div></div></div>
+    <div class="row">
+        {% for data in data_snp %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-white"><h5 class="mb-0">{{ data.madrasah.nama }}</h5></div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        {% for k,v in data.pemantauan.items %}
+                        <tr><td width="60%">{% if k == 'isi' %}Standar Isi{% elif k == 'proses' %}Standar Proses{% elif k == 'lulusan' %}Standar Lulusan{% elif k == 'pendidik' %}Standar Pendidik{% elif k == 'sarana' %}Standar Sarana{% elif k == 'pengelolaan' %}Standar Pengelolaan{% elif k == 'pembiayaan' %}Standar Pembiayaan{% else %}Standar Penilaian{% endif %}</td>
+                        <td>{% if v.status == 'terpenuhi' %}<span class="badge bg-success">Terpenuhi</span>{% elif v.status == 'sebagian' %}<span class="badge bg-warning">Sebagian</span>{% else %}<span class="badge bg-danger">Belum</span>{% endif %}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
